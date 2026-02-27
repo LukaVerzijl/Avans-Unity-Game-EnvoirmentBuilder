@@ -24,11 +24,13 @@ public class ApiManager : Singleton<ApiManager>
 
     private new void Awake()
     {
-        spawnedUserApiClient = Instantiate(ApiClientObject, this.transform);
+        spawnedUserApiClient = Instantiate(ApiClientObject, this.gameObject.transform);
         
         userApiClient = spawnedUserApiClient.GetComponent<UserApiClient>();
         enviroment2DApiClient = spawnedUserApiClient.GetComponent<Environment2DApiClient>();
         object2DApiClient = spawnedUserApiClient.GetComponent<Object2DApiClient>();
+        
+        DontDestroyOnLoad(this.gameObject);
     }
 
     #endregion
