@@ -1,4 +1,5 @@
-using System;
+using System.Threading.Tasks;
+using Code.Managers;
 using TMPro;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class LoginUI : MonoBehaviour
     }
 
 
-    public void OnLoginButtonClicked()
+    public async Task OnLoginButtonClicked()
     {
         string email = emailInput.text;
         string password = passwordInput.text;
@@ -25,19 +26,36 @@ public class LoginUI : MonoBehaviour
         
         ApiManager.Instance.user.Email = email;
         ApiManager.Instance.user.Password = password;
-        ApiManager.Instance.Login();
+        if (await ApiManager.Instance.Login())
+        {
+            Debug.Log("Login succes!");
+            await UIManager.Instance.ShowEnvironmentUI();
+        }
+        else
+        {
+            Debug.Log("Login failed!");
+            validationText.text = "Login failed! Please check your credentials and try again.";
+            
+        }
+        
     }
 
-    public void OnRegisterButtonClicked()
+    public async Task OnRegisterButtonClicked()
     {
         string email = emailInput.text;
         string password = passwordInput.text;
         
         ApiManager.Instance.user.Email = email;
         ApiManager.Instance.user.Password = password;
-        ApiManager.Instance.Register();
+        if (await ApiManager.Instance.Register())
+        {
+            await  UIManager.Instance.ShowEnvironmentUI();
+        }
+        else
+        {
+            validationText.text = "Registration failed! Please check your credentials and try again.";
+        }
+
     }
-    
-    
     
 }

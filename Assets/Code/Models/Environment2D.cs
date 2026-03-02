@@ -14,4 +14,6 @@ public class Environment2D
     public int MaxLength;
 
     public int MaxHeight;
+    public DateTime createdAt;
+    public DateTime updatedAt;
 }

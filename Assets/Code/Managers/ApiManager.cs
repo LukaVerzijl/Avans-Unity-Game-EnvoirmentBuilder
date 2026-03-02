@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Code.Utils;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class ApiManager : Singleton<ApiManager>
     
     private GameObject spawnedUserApiClient;
     private UserApiClient userApiClient;
-    private Environment2DApiClient enviroment2DApiClient;
+    [SerializeField]private Environment2DApiClient enviroment2DApiClient;
     private Object2DApiClient object2DApiClient;
 
 
@@ -37,7 +38,7 @@ public class ApiManager : Singleton<ApiManager>
     #region Login
 
     [ContextMenu("User/Register")]
-    public async void Register()
+    public async Task<bool> Register()
     {
         
         IWebRequestReponse webRequestResponse = await userApiClient.Register(user);
@@ -46,12 +47,17 @@ public class ApiManager : Singleton<ApiManager>
         {
             case WebRequestData<string> dataResponse:
                 Debug.Log("Register succes!");
-                // TODO: Handle succes scenario;
+                if (await Login())
+                {
+                    return true;
+                }
+                return false;
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Register error: " + errorMessage);
                 // TODO: Handle error scenario. Show the errormessage to the user.
+                return false;
                 break;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
@@ -59,7 +65,7 @@ public class ApiManager : Singleton<ApiManager>
     }
 
     [ContextMenu("User/Login")]
-    public async void Login()
+    public async Task<bool> Login()
     {
         IWebRequestReponse webRequestResponse = await userApiClient.Login(user);
 
@@ -67,16 +73,19 @@ public class ApiManager : Singleton<ApiManager>
         {
             case WebRequestData<string> dataResponse:
                 Debug.Log("Login succes!");
-                // TODO: Todo handle succes scenario.
+                return true;
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Login error: " + errorMessage);
+                return false;
                 // TODO: Handle error scenario. Show the errormessage to the user.
                 break;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+                return false;
         }
+        
     }
 
     #endregion
@@ -84,7 +93,7 @@ public class ApiManager : Singleton<ApiManager>
     #region Environment
 
     [ContextMenu("Environment2D/Read all")]
-    public async void ReadEnvironment2Ds()
+    public async Task<List<Environment2D>> ReadEnvironment2Ds()
     {
         IWebRequestReponse webRequestResponse = await enviroment2DApiClient.ReadEnvironment2Ds();
 
@@ -93,21 +102,19 @@ public class ApiManager : Singleton<ApiManager>
             case WebRequestData<List<Environment2D>> dataResponse:
                 List<Environment2D> environment2Ds = dataResponse.Data;
                 Debug.Log("List of environment2Ds: ");
-                environment2Ds.ForEach(environment2D => Debug.Log(environment2D.Id));
-                // TODO: Handle succes scenario.
-                break;
+                
+                return environment2Ds;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Read environment2Ds error: " + errorMessage);
-                // TODO: Handle error scenario. Show the errormessage to the user.
-                break;
+                return new List<Environment2D>();
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
     }
 
     [ContextMenu("Environment2D/Create")]
-    public async void CreateEnvironment2D()
+    public async Task CreateEnvironment2D()
     {
         IWebRequestReponse webRequestResponse = await enviroment2DApiClient.CreateEnvironment(environment2D);
 
