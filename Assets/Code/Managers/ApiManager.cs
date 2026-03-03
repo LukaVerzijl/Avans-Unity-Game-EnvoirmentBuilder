@@ -31,7 +31,7 @@ public class ApiManager : Singleton<ApiManager>
         enviroment2DApiClient = spawnedUserApiClient.GetComponent<Environment2DApiClient>();
         object2DApiClient = spawnedUserApiClient.GetComponent<Object2DApiClient>();
         
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject.transform.root.gameObject);
     }
 
     #endregion
@@ -52,13 +52,11 @@ public class ApiManager : Singleton<ApiManager>
                     return true;
                 }
                 return false;
-                break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Register error: " + errorMessage);
                 // TODO: Handle error scenario. Show the errormessage to the user.
                 return false;
-                break;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
@@ -74,16 +72,12 @@ public class ApiManager : Singleton<ApiManager>
             case WebRequestData<string> dataResponse:
                 Debug.Log("Login succes!");
                 return true;
-                break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Login error: " + errorMessage);
                 return false;
-                // TODO: Handle error scenario. Show the errormessage to the user.
-                break;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-                return false;
         }
         
     }
@@ -122,7 +116,7 @@ public class ApiManager : Singleton<ApiManager>
         {
             case WebRequestData<Environment2D> dataResponse:
                 environment2D.Id = dataResponse.Data.Id;
-                // TODO: Handle succes scenario.
+                Debug.Log("Create environment2D success");
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;

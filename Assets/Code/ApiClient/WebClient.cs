@@ -22,6 +22,7 @@ public class WebClient : MonoBehaviour
     public async Awaitable<IWebRequestReponse> SendPostRequest(string route, string data)
     {
         UnityWebRequest webRequest = CreateWebRequest("POST", route, data);
+        Debug.Log("Sending request to " + webRequest.url);
         return await SendWebRequest(webRequest);
     }
 
@@ -54,15 +55,21 @@ public class WebClient : MonoBehaviour
 
     private async Awaitable<IWebRequestReponse> SendWebRequest(UnityWebRequest webRequest)
     {
-        await webRequest.SendWebRequest();
-
-        switch (webRequest.result)
+        // The 'using' block automatically disposes the request and frees up the connection!
+        using (webRequest) 
         {
-            case UnityWebRequest.Result.Success:
-                string responseData = webRequest.downloadHandler.text;
-                return new WebRequestData<string>(responseData);
-            default:
-                return new WebRequestError(webRequest.error);
+            Debug.Log("Sending request to " + webRequest.url);
+            await webRequest.SendWebRequest();
+            Debug.Log("Received response from " + webRequest.url + " with code: " + webRequest.responseCode);
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.Success:
+                    string responseData = webRequest.downloadHandler.text;
+                    return new WebRequestData<string>(responseData);
+                default:
+                    return new WebRequestError(webRequest.error);
+            }
         }
     }
  

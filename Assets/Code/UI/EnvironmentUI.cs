@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Managers;
@@ -20,7 +21,7 @@ namespace Code.UI
         public async Task LoadEnvironments()
         {
             environments = await ApiManager.Instance.ReadEnvironment2Ds();
-            if (environments.Count > 0) ;
+            if (environments.Count > 0)
             {
                 foreach (Environment2D environment in environments)
                 {
@@ -42,11 +43,7 @@ namespace Code.UI
         {
             Debug.Log("loading environment with id: " + environment2D.Id);
         }
-
-        public void createEnvironments()
-        {
-            Task.Run(() => createEnvironment());
-        }
+        
 
         public void OpenCreateEnvironmentUI()
         {
@@ -54,13 +51,17 @@ namespace Code.UI
             createModal.SetActive(true);
         }
 
-        public async Task createEnvironment()
+        public async void createEnvironment()
         {
             if (environments.Count >= 5)
                 return;
             
             Environment2D environment2D = new Environment2D();
+            Guid guid = Guid.NewGuid();
+            environment2D.Id = guid.ToString();
             environment2D.Name = nameField.text;
+            environment2D.MaxHeight = 100;
+            environment2D.MaxLength = 100;
             ApiManager.Instance.environment2D = environment2D;
             await ApiManager.Instance.CreateEnvironment2D();
             

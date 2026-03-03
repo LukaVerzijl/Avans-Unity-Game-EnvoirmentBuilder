@@ -39,7 +39,7 @@ namespace Code.Utils
             if (_instance == null)
             {
                 _instance = this as T;
-                DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(gameObject.transform.root.gameObject);
             }
             else if (_instance != this)
             {

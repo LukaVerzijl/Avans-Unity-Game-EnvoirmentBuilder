@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7483390635242513005}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8323141342300449836}
+        m_TargetAssemblyTypeName: Code.UI.EnvironmentUI, Assembly-CSharp
+        m_MethodName: OpenCreateEnvironmentUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &132387053839637292
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,7 +778,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8323141342300449836}
         m_TargetAssemblyTypeName: Code.UI.EnvironmentUI, Assembly-CSharp
-        m_MethodName: createEnvironments
+        m_MethodName: createEnvironment
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1863,8 +1875,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2315177186707334555}
   m_HandleRect: {fileID: 7787747352375255918}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.56826663
+  m_Value: 1.0000002
+  m_Size: 0.5682667
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
