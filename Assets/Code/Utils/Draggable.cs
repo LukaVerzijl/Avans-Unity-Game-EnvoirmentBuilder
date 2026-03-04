@@ -1,4 +1,5 @@
 using System;
+using Code.Managers;
 using UnityEngine;
 
 /*
@@ -6,36 +7,35 @@ using UnityEngine;
 */
 public class Draggable: MonoBehaviour
 {
-    public Transform trans;
- 
-    private bool isDragging = false;
-
-    public void StartDragging()
-    {
-        isDragging = true;
-    }
-
-    public void Update()
-    {
-        if (isDragging)
-            trans.position = GetMousePosition();
-    }
-
-    private void OnMouseUpAsButton()
-    {
-        isDragging = !isDragging;
-
-        if (!isDragging)
+    
+        public bool isDragging = false;
+        public string prefabId;
+        public string id;
+        private bool isNew = true;
+    
+        public void Update()
         {
-            // Stopped dragging. Add any logic here that you need for this scenario.
+            if (isDragging)
+                this.transform.position = GetMousePosition();
         }
-    }
-
-    private Vector3 GetMousePosition()
-    {
-        Vector3 positionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        positionInWorld.z = 0;
-        return positionInWorld;
-    }
-
+    
+        private void OnMouseUpAsButton()
+        {
+            isDragging = !isDragging;
+    
+            if (!isDragging)
+            {
+                EnvManager.Instance.SaveObject(id, prefabId, this.transform.position.x, this.transform.position.y, this.transform.rotation.eulerAngles.z, this.GetComponent<SpriteRenderer>().sortingOrder, isNew);
+                UIManager.Instance.showSideUI();
+                isNew = false;
+            }
+        }
+    
+        private Vector3 GetMousePosition()
+        {
+            Vector3 positionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            positionInWorld.z = 0;
+            return positionInWorld;
+        }
+        
 }

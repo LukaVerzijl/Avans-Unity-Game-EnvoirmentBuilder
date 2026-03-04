@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Utils;
+using NUnit.Framework;
 using UnityEngine;
 
 public class ApiManager : Singleton<ApiManager>
@@ -155,7 +156,7 @@ public class ApiManager : Singleton<ApiManager>
     #region Object2D
 
     [ContextMenu("Object2D/Read all")]
-    public async void ReadObject2Ds()
+    public async Task<List<Object2D>> ReadObject2Ds()
     {
         IWebRequestReponse webRequestResponse = await object2DApiClient.ReadObject2Ds(object2D.EnvironmentId);
 
@@ -165,13 +166,12 @@ public class ApiManager : Singleton<ApiManager>
                 List<Object2D> object2Ds = dataResponse.Data;
                 Debug.Log("List of object2Ds: " + object2Ds);
                 object2Ds.ForEach(object2D => Debug.Log(object2D.Id));
-                // TODO: Succes scenario. Show the enviroments in the UI
-                break;
+                return object2Ds;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Read object2Ds error: " + errorMessage);
                 // TODO: Error scenario. Show the errormessage to the user.
-                break;
+                return null;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }

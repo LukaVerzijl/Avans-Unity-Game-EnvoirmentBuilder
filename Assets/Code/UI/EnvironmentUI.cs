@@ -39,9 +39,13 @@ namespace Code.UI
         }
 
 
-        public async Task loadEnvironment(Environment2D environment2D)
+        public void loadEnvironment(Environment2D environment2D)
         {
             Debug.Log("loading environment with id: " + environment2D.Id);
+            EnvManager.Instance.LoadEnvironment(environment2D);
+            
+            UIManager.Instance.HideAllUI();
+            UIManager.Instance.showSideUI();
         }
         
 
@@ -65,7 +69,7 @@ namespace Code.UI
             ApiManager.Instance.environment2D = environment2D;
             await ApiManager.Instance.CreateEnvironment2D();
             
-            await loadEnvironment(environment2D);
+            loadEnvironment(environment2D);
         }
     }
 }

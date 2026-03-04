@@ -26,7 +26,7 @@ public class LoginUI : MonoBehaviour
         if (await ApiManager.Instance.Login())
         {
             Debug.Log("Login succes!");
-            await UIManager.Instance.ShowEnvironmentUI();
+            UIManager.Instance.ShowEnvironmentUI();
         }
         else
         {
@@ -43,8 +43,8 @@ public class LoginUI : MonoBehaviour
         ApiManager.Instance.user.Email = email;
         ApiManager.Instance.user.Password = password;
         if (await ApiManager.Instance.Register())
-        {
-            await UIManager.Instance.ShowEnvironmentUI();
+        { 
+            UIManager.Instance.ShowEnvironmentUI();
         }
         else
         {
