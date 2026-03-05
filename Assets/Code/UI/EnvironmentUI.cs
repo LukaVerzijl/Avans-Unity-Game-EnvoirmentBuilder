@@ -21,6 +21,7 @@ namespace Code.UI
         
         public async Task LoadEnvironments()
         {
+            listModal.SetActive(true);
             foreach (EnvButton button in scrollViewContainer.GetComponentsInChildren<EnvButton>())
             {
                 Destroy(button.gameObject);
