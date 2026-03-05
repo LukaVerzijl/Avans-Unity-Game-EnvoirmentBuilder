@@ -8,6 +8,7 @@ public class LoginUI : MonoBehaviour
     [SerializeField] private TMP_InputField emailInput;
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private TMP_Text validationText;
+    private bool isLoggingIn = false;
 
     private void Awake()
     {
@@ -16,27 +17,34 @@ public class LoginUI : MonoBehaviour
 
     public async void OnLoginButtonClicked()
     {
+        if (isLoggingIn)
+        {
+            return;
+        }
+        isLoggingIn = true;
         string email = emailInput.text;
         string password = passwordInput.text;
-        Debug.Log(email);
-        Debug.Log(password);
         
         ApiManager.Instance.user.Email = email;
         ApiManager.Instance.user.Password = password;
         if (await ApiManager.Instance.Login())
         {
             Debug.Log("Login succes!");
+            isLoggingIn = false;
             UIManager.Instance.ShowEnvironmentUI();
         }
         else
         {
             Debug.Log("Login failed!");
+            isLoggingIn = false;
             validationText.text = "Login failed! Please check your credentials and try again.";
         }
     }
 
     public async void OnRegisterButtonClicked()
     {
+        if (isLoggingIn) return;
+        isLoggingIn = true;
         string email = emailInput.text;
         string password = passwordInput.text;
         
@@ -44,10 +52,12 @@ public class LoginUI : MonoBehaviour
         ApiManager.Instance.user.Password = password;
         if (await ApiManager.Instance.Register())
         { 
+            isLoggingIn = false;
             UIManager.Instance.ShowEnvironmentUI();
         }
         else
         {
+            isLoggingIn = false;
             validationText.text = "Registration failed! Please check your credentials and try again.";
         }
     }

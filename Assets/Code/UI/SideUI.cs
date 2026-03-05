@@ -14,6 +14,11 @@ namespace Code.UI
             {
                 EnvManager.Instance.PlaceObject(id);
             }
+
+            public void BackToMainMenu()
+            {
+                EnvManager.Instance.UnloadEnvironment();
+            }
             
     }
 }

@@ -47,7 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619e245fed531423999f61d1302d97b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Draggable
-  trans: {fileID: 7308966149462812059}
+  isDragging: 0
+  prefabId: 
+  id: 
 --- !u!61 &5248599768223435375
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -171,8 +173,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 893827589
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6548944917499885380, guid: 4b999792a00714e4e8224fe3fa8ae13e, type: 3}
@@ -262,8 +264,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 893827589
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2316819818445742035, guid: 4b999792a00714e4e8224fe3fa8ae13e, type: 3}

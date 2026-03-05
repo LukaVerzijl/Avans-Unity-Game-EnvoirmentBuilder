@@ -20,6 +20,10 @@ namespace Code.UI
         
         public async Task LoadEnvironments()
         {
+            foreach (EnvButton button in scrollViewContainer.GetComponentsInChildren<EnvButton>())
+            {
+                Destroy(button.gameObject);
+            }
             environments = await ApiManager.Instance.ReadEnvironment2Ds();
             if (environments.Count > 0)
             {

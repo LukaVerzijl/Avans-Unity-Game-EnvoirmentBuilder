@@ -36,6 +36,7 @@ RectTransform:
   - {fileID: 3532099126556206290}
   - {fileID: 2022997429763098191}
   - {fileID: 3625727006693508383}
+  - {fileID: 5945244290824975560}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -129,6 +130,7 @@ MonoBehaviour:
   environment2D: {fileID: 1199755363326081580}
   loginUI: {fileID: 4988282881020467807}
   sideUI: {fileID: 8904027484526780653}
+  editUI: {fileID: 6630642231866238662}
 --- !u!1001 &3195113670027058563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2113274015571032401, guid: 224ca3d69869f45c1a94cc871445d6f5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -11.679932
+      value: -11.679886
       objectReference: {fileID: 0}
     - target: {fileID: 2113274015571032401, guid: 224ca3d69869f45c1a94cc871445d6f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -250,6 +252,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b4ce66c8fd446269ace586cad88894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoginUI
+--- !u!1001 &3339424514063703631
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6061088120382712514}
+    m_Modifications:
+    - target: {fileID: 1799523722278501311, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_Name
+      value: EditUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799523722278501311, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+--- !u!4 &5945244290824975560 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8996438102032853639, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+  m_PrefabInstance: {fileID: 3339424514063703631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6630642231866238662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8240673751262869641, guid: c81d6c57e6fd6425c92315f502b597a2, type: 3}
+  m_PrefabInstance: {fileID: 3339424514063703631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224a5af4b3d04f11ade53ff828ed9ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.UI.EditUI
 --- !u!1001 &4032618869491823000
 PrefabInstance:
   m_ObjectHideFlags: 0

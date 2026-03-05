@@ -10,6 +10,7 @@ namespace Code.Managers
         public EnvironmentUI environment2D;
         public LoginUI loginUI;
         public SideUI sideUI;
+        public EditUI editUI;
 
         private void Start()
         {
@@ -32,6 +33,7 @@ namespace Code.Managers
             environment2D.gameObject.SetActive(false);
             loginUI.gameObject.SetActive(false);
             sideUI.gameObject.SetActive(false);
+            editUI.gameObject.SetActive(false);
         }
 
         public void showSideUI()

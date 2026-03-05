@@ -10,7 +10,7 @@ public class Object2DApiClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> ReadObject2Ds(string environmentId)
     {
-        string route = "/environments/" + environmentId + "/objects";
+        string route = "/objects/" + environmentId;
 
         IWebRequestReponse webRequestResponse = await webClient.SendGetRequest(route);
         return ParseObject2DListResponse(webRequestResponse);
@@ -18,19 +18,24 @@ public class Object2DApiClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> CreateObject2D(Object2D object2D)
     {
-        string route = "/environments/" + object2D.EnvironmentId + "/objects";
+        string route = "/objects/";
         string data = JsonConvert.SerializeObject(object2D, JsonHelper.CamelCaseSettings);
-
         IWebRequestReponse webRequestResponse = await webClient.SendPostRequest(route, data);
         return ParseObject2DResponse(webRequestResponse);
     }
 
     public async Awaitable<IWebRequestReponse> UpdateObject2D(Object2D object2D)
     {
-        string route = "/environments/" + object2D.EnvironmentId + "/objects/" + object2D.Id;
+        string route = "/objects/" + object2D.Id;
         string data = JsonConvert.SerializeObject(object2D, JsonHelper.CamelCaseSettings);
 
         return await webClient.SendPutRequest(route, data);
+    }
+
+    public async Awaitable<IWebRequestReponse> DeleteObject2D(Object2D object2D)
+    {
+        string route = "/objects/" + object2D.Id;
+        return await webClient.SendDeleteRequest(route);
     }
 
     private IWebRequestReponse ParseObject2DResponse(IWebRequestReponse webRequestResponse)

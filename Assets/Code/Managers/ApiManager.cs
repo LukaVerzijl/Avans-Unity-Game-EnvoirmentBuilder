@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Utils;
-using NUnit.Framework;
 using UnityEngine;
 
 public class ApiManager : Singleton<ApiManager>
@@ -158,7 +157,7 @@ public class ApiManager : Singleton<ApiManager>
     [ContextMenu("Object2D/Read all")]
     public async Task<List<Object2D>> ReadObject2Ds()
     {
-        IWebRequestReponse webRequestResponse = await object2DApiClient.ReadObject2Ds(object2D.EnvironmentId);
+        IWebRequestReponse webRequestResponse = await object2DApiClient.ReadObject2Ds(object2D.GameEnvironmentId);
 
         switch (webRequestResponse)
         {
@@ -178,7 +177,7 @@ public class ApiManager : Singleton<ApiManager>
     }
 
     [ContextMenu("Object2D/Create")]
-    public async void CreateObject2D()
+    public async Task<bool> CreateObject2D()
     {
         IWebRequestReponse webRequestResponse = await object2DApiClient.CreateObject2D(object2D);
 
@@ -186,20 +185,18 @@ public class ApiManager : Singleton<ApiManager>
         {
             case WebRequestData<Object2D> dataResponse:
                 object2D.Id = dataResponse.Data.Id;
-                // TODO: Handle succes scenario.
-                break;
+                return true;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Create object2D error: " + errorMessage);
-                // TODO: Handle error scenario. Show the errormessage to the user.
-                break;
+                return false;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
     }
 
     [ContextMenu("Object2D/Update")]
-    public async void UpdateObject2D()
+    public async Task<bool> UpdateObject2D()
     {
         IWebRequestReponse webRequestResponse = await object2DApiClient.UpdateObject2D(object2D);
 
@@ -208,15 +205,31 @@ public class ApiManager : Singleton<ApiManager>
             case WebRequestData<string> dataResponse:
                 string responseData = dataResponse.Data;
                 Debug.Log("Update object2D success");
-                // TODO: Handle succes scenario.
-                break;
+                return true;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Update object2D error: " + errorMessage);
-                // TODO: Handle error scenario. Show the errormessage to the user.
-                break;
+                return false;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
+    [ContextMenu("Object2D/Delete")]
+    public async Task<bool> DeleteObject2D()
+    {
+        IWebRequestReponse webRequestReponse = await object2DApiClient.DeleteObject2D(object2D);
+        switch (webRequestReponse)
+        {
+            case  WebRequestData<bool> dataResponse:
+                Debug.Log("Delete object2D success");
+                return true;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Delete object2D error: " + errorMessage);
+                return false;
+            default:
+                return false;
         }
     }
 

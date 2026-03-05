@@ -20,5 +20,11 @@ namespace Code.UI
             environmentName.text = title;
             environmentChangedAt.text = changedAt;
         }
+        
+        public void OnDeleteButtonClick()
+        {
+            EnvManager.Instance.DeleteEnvoirment(environment2D.Id);
+            Destroy(this.gameObject);
+        }
     }
 }

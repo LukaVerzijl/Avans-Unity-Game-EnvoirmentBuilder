@@ -10,7 +10,7 @@ public class Object2D
 {
     public string Id;
 
-    public string EnvironmentId;
+    public string GameEnvironmentId;
 
     public string PrefabId;
 
