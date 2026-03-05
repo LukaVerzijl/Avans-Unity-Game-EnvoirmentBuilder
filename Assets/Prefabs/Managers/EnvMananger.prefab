@@ -47,4 +47,5 @@ MonoBehaviour:
   objects:
   - {fileID: 3440606973609249319, guid: 26ee2f50ead534f83b5a8e9edd2fae8d, type: 3}
   - {fileID: 3440606973609249319, guid: 1df10241ff4574c0dbb7d056d128316d, type: 3}
+  - {fileID: 3440606973609249319, guid: 6c3e53175af5c4060bf82ee3bfa47112, type: 3}
   loadedObjects: []
