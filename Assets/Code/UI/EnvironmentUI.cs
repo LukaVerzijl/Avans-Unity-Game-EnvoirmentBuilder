@@ -72,6 +72,13 @@ namespace Code.UI
                 return;
                 
             }
+
+            if (nameField.text != "" || nameField.text.Length >= 25)
+            {
+                Debug.Log("Environment name must be between 1 and 25 characters!");
+                errorText.text = "Environment name must be between 1 and 25 characters!";
+                return;
+            }
             
             Environment2D environment2D = new Environment2D();
             Guid guid = Guid.NewGuid();
