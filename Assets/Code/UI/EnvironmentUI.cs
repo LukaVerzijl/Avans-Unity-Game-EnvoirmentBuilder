@@ -17,6 +17,7 @@ namespace Code.UI
         public GameObject createModal;
         public TMP_InputField nameField;
         private List<Environment2D> environments;
+        public TMP_Text errorText;
         
         public async Task LoadEnvironments()
         {
@@ -63,6 +64,13 @@ namespace Code.UI
         {
             if (environments.Count >= 5)
                 return;
+            if (environments.Exists(env => env.Name == nameField.text))
+            {
+                Debug.Log("Environment with name " + nameField.text + " already exists!");
+                errorText.text = "Environment with name " + nameField.text + " already exists!";
+                return;
+                
+            }
             
             Environment2D environment2D = new Environment2D();
             Guid guid = Guid.NewGuid();
@@ -72,7 +80,9 @@ namespace Code.UI
             environment2D.MaxLength = 100;
             ApiManager.Instance.environment2D = environment2D;
             await ApiManager.Instance.CreateEnvironment2D();
-            
+
+            nameField.text = "Enter a name";
+            createModal.SetActive(false);
             loadEnvironment(environment2D);
         }
     }
